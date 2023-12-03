@@ -1,6 +1,8 @@
 import { useSearchParams } from "react-router-dom";
 import "./Home.css"
-
+import Diya from "./diya.png";
+import DiwaliLamp from "./diwali-lamp.png"
+import { useState } from "react";
 
 const greetName = [
     "यशाची रोषणाई दिपावलीच्या आजपासून ते भाऊबीज पर्यंतच्या साजरा होत असलेल्या आनंदमयी उत्साही, मंगलमय पर्वानिमित्त आपणास व ,परिवारास मनःपूर्वक हार्दिक शुभेच्छ ",
@@ -21,20 +23,77 @@ export default function Home() {
 
     const [searchParams] = useSearchParams();
 
-    const to = searchParams.get("to");
-    const from = searchParams.get("from");
-    const greetNumber = searchParams.get("g")>=greetName.length ? 0 : searchParams.get("g") || 0 ;
+    const [to,setTo]=useState(searchParams.get("to"));
+    const [from,setFrom]=useState(searchParams.get("from"));
+    const [greetNumber,setGreetNumber]=useState(searchParams.get("g")>=greetName.length ? 0 : searchParams.get("g") || 0 );
+    const [themeNumber,setThemeNumber]=useState(searchParams.get("t"));
+
     
     return (
-        <div className="greet-card">
 
-            <span>
-                प्रिय {to}
-            </span>
-            <p> {greetName[greetNumber]}</p><br/>
+        <div> 
+            <div className={`greet-card ${`theme-${themeNumber}`}`} >
 
-            <span className="from-message">  आपला शुभेच्छुक 🙏🏻
-                {from}</span>
+
+                <img src={DiwaliLamp} className="lamp right"/>
+
+                <img src={DiwaliLamp} className="lamp left"/>
+                <br/><br/><br/>
+               
+                <span>
+                    प्रिय {to}
+                </span>
+                <p className="text">  {greetName[greetNumber]}</p><br/>
+
+                    <img src={Diya} className="lamp diya"/><br/><br/>
+                <span className="from-message">  आपला शुभेच्छुक 🙏🏻
+                    {from}</span>
+            </div>
+
+
+          <div className="input-fields"> 
+
+                <input type="text" placeholder="to"
+                className="input"
+                value={to} onChange={(e)=>{
+                    setTo(e.target.value)
+                }}/>;
+
+                <input type="text" placeholder="from"
+                className="input"
+                value={from} onChange={(e)=>{
+                    setFrom(e.target.value)
+                }}/>;
+
+
+                    <select value={greetNumber}
+                    className="input"
+                    onChange={(e)=>{
+                        setGreetNumber(e.target.value)
+                    }}> 
+                        <option value="0"> Greeting 1</option>
+                        <option value="1"> Greeting 2</option>
+                        <option value="2"> Greeting 3</option>
+                        <option value="3"> Greeting 4</option>
+                    </select>
+                
+
+                
+
+                  <select value={themeNumber}
+                  className="input"
+                  onChange={(e)=>{
+                        setThemeNumber(e.target.value)
+                    }}> 
+                       
+                        <option value="1"> Greeting 1</option>
+                        <option value="2"> Greeting 2</option>
+                        <option value="3"> Greeting 3</option>
+                        <option value="4"> Greeting 4</option>
+                    </select>
+           </div><br/><br/>
+
+                      <p className="url"> {import.meta.env.VITE_BASE_URL}?to={to}&from={from}&g={greetNumber}&t={themeNumber}</p>
         </div>
     )
 }
