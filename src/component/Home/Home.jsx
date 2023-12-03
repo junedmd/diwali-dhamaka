@@ -50,7 +50,7 @@ export default function Home() {
                     {from}</span>
             </div>
 
-
+                <p> Do you want to create your own Diwali Greeting? Customize it here  👇.</p>
           <div className="input-fields"> 
 
                 <input type="text" placeholder="to"
