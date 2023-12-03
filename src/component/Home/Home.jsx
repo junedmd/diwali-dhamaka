@@ -49,7 +49,7 @@ export default function Home() {
                 <span className="from-message">  आपला शुभेच्छुक 🙏🏻
                     {from}</span>
             </div>
-
+                <br/><br/> <br/><br/> <br/><br/>
                 <p> Do you want to create your own Diwali Greeting? Customize it here  👇.</p>
           <div className="input-fields"> 
 
